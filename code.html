@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blast.id — Home</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <div class="dot"></div>
+        <h1>Blast.id</h1>
+      </div>
+      <div>
+        <a href="/login.html" class="btn">Masuk</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Selamat datang di Blast.id (demo)</h2>
+      <p class="hint">Aplikasi ini adalah contoh penuh fitur yang siap Anda konfigurasikan dengan kredensial provider resmi (WhatsApp Business Platform / Twilio, Stripe dll.).</p>
+      <div style="margin-top:12px;">
+        <a href="/register.html" class="btn">Daftar</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Katalog contoh layanan</h3>
+      <div id="services"></div>
+    </div>
+
+    <div class="footer">Blast.id demo • Tema: dark navy & neon biru</div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    (async function(){
+      const res = await fetch('/api/services');
+      const services = await res.json();
+      const el = document.getElementById('services');
+      el.innerHTML = services.map(s=>`<div style="padding:10px;border-radius:8px;background:rgba(0,0,0,0.2);margin-bottom:8px">
+        <strong style="color:var(--accent)">${s.title}</strong>
+        <div style="color:var(--muted)">${s.description}</div>
+        <div style="margin-top:6px"><strong>$${Number(s.price).toFixed(2)}</strong></div>
+      </div>`).join('');
+    })();
+  </script>
+</body>
+</html>
